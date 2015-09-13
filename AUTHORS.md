@@ -11,6 +11,8 @@ Joseph Martinot-Lagarde ([@Nodd](http://github.com/Nodd))
 Code Contributors
 =================
 
+Joseph Martinot-Lagarde ([@Nodd](http://github.com/Nodd))
+
 Christer van der Meeren ([@cmeeren](http://github.com/cmeeren))
 
 Gonzalo Peña-Castellanos ([@goanpeca](http://github.com/goanpeca))

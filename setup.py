@@ -7,7 +7,6 @@ Setup script for spyder.memory_profiler
 from setuptools import setup, find_packages
 import os
 import os.path as osp
-import sys
 
 
 def get_version():

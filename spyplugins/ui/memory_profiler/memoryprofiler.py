@@ -18,12 +18,10 @@ from spyderlib.utils.qthelpers import get_icon, create_action
 
 # Local imports
 from .data import images
-from .widgets.memoryprofilergui import (MemoryProfilerWidget,
-					is_memoryprofiler_installed)
+from .widgets.memoryprofiler import (MemoryProfilerWidget,
+					           is_memoryprofiler_installed)
 
-
-#_ = get_translation("p_memoryprofiler", dirname="spyderplugins")
-_ = get_translation("line_profiler", dirname="spyplugins.ui.line_profiler")
+_ = get_translation("memory_profiler", dirname="spyplugins.ui.memory_profiler")
 
 
 class MemoryProfilerConfigPage(PluginConfigPage):
@@ -79,7 +77,7 @@ class MemoryProfiler(MemoryProfilerWidget, SpyderPluginMixin):
         # Initialize plugin
         self.initialize_plugin()
 
-    #------ SpyderPluginWidget API --------------------------------------------
+    # --- SpyderPluginWidget API ----------------------------------------------
     def get_plugin_title(self):
         """Return widget title."""
         return _("Memory profiler")

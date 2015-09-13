@@ -11,9 +11,6 @@ Memory Profiler widget
 
 See the official documentation of memory_profiler:
 https://pypi.python.org/pypi/memory_profiler/
-
-Questions for Pierre and others:
-    - Where in the menu should memory profiler go?  Run > Profile memory by line ?
 """
 
 # Standar library imports
@@ -49,7 +46,7 @@ except ImportError:
 
 locale_codec = QTextCodec.codecForLocale()
 #_ = get_translation("memoryprofiler", dirname="spyplugins.ui.line_profiler")
-_ = get_translation("lineprofiler", dirname="spyplugins.ui.line_profiler")
+_ = get_translation("memory_profiler", dirname="spyplugins.ui.memory_profiler")
 
 COL_NO = 0
 COL_USAGE = 1
