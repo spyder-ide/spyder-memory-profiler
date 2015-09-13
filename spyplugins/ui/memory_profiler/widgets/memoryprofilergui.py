@@ -16,38 +16,40 @@ Questions for Pierre and others:
     - Where in the menu should memory profiler go?  Run > Profile memory by line ?
 """
 
+# Standar library imports
 from __future__ import with_statement
+import hashlib
+import inspect
+import linecache
+import os
+import os.path as osp
+import sys
+import time
 
+# Third party imports
+from spyderlib.qt.compat import getopenfilename
+from spyderlib.qt.QtCore import SIGNAL, QProcess, QByteArray, Qt, QTextCodec
 from spyderlib.qt.QtGui import (QHBoxLayout, QWidget, QMessageBox, QVBoxLayout,
                                 QLabel, QTreeWidget, QTreeWidgetItem,
                                 QApplication, QBrush, QColor, QFont)
-from spyderlib.qt.QtCore import SIGNAL, QProcess, QByteArray, Qt, QTextCodec
-locale_codec = QTextCodec.codecForLocale()
-from spyderlib.qt.compat import getopenfilename
-
-import sys
-import os
-import os.path as osp
-import time
-import linecache
-import inspect
-import hashlib
-
-# Local imports
-from spyderlib.utils.qthelpers import create_toolbutton, get_icon
+from spyderlib.config.base import get_conf_path, get_translation
 from spyderlib.utils import programs
-from spyderlib.baseconfig import get_conf_path, get_translation
+from spyderlib.utils.qthelpers import create_toolbutton, get_icon
 from spyderlib.widgets.texteditor import TextEditor
 from spyderlib.widgets.comboboxes import PythonModulesComboBox
 from spyderlib.widgets.externalshell import baseshell
+
 try:
     from spyderlib.py3compat import to_text_string, getcwd
 except ImportError:
     # python2
     to_text_string = unicode
     getcwd = os.getcwdu
-_ = get_translation("p_memoryprofiler", dirname="spyderplugins")
 
+
+locale_codec = QTextCodec.codecForLocale()
+#_ = get_translation("memoryprofiler", dirname="spyplugins.ui.line_profiler")
+_ = get_translation("lineprofiler", dirname="spyplugins.ui.line_profiler")
 
 COL_NO = 0
 COL_USAGE = 1
@@ -61,14 +63,15 @@ WEBSITE_URL = 'https://pypi.python.org/pypi/memory_profiler/'
 
 
 def is_memoryprofiler_installed():
-    """Checks if the library for memory_profiler is installed
+    """
+    Checks if the library for memory_profiler is installed.
     """
     return programs.is_module_installed('memory_profiler')
 
 
 class MemoryProfilerWidget(QWidget):
     """
-    Memory profiler widget
+    Memory profiler widget.
     """
     DATAPATH = get_conf_path('memoryprofiler.results')
     VERSION = '0.0.1'
