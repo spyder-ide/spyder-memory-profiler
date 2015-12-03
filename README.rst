@@ -8,6 +8,13 @@ This is a plugin to run the python `memory_profiler <https://pypi.python.org/pyp
 
 The code is an adaptation of the profiler plugin integrated in `spyder <https://github.com/spyder-ide/spyder>`_.
 
+Important
+---------
+**Spyder** plugin support will be released with version 3.0 (Still in Beta).
+
+If you want to try out this plugin you need to use the latest development version o **Spyder**  (**master** branch).
+
+
 Install instructions
 --------------------
 
