@@ -9,8 +9,8 @@
 """Memory profiler Plugin."""
 
 # Third party imports
-from spyderlib.qt.QtCore import SIGNAL, Qt
-from spyderlib.qt.QtGui import QVBoxLayout, QGroupBox, QLabel
+from qtpy.QtCore import Qt
+from qtpy.QtWidgets import QVBoxLayout, QGroupBox, QLabel
 
 from spyderlib.config.base import get_translation
 from spyderlib.plugins import SpyderPluginMixin, PluginConfigPage, runconfig
@@ -104,10 +104,8 @@ class MemoryProfiler(MemoryProfilerWidget, SpyderPluginMixin):
 
     def register_plugin(self):
         """Register plugin in Spyder's main window."""
-        self.connect(self, SIGNAL("edit_goto(QString,int,QString)"),
-                     self.main.editor.load)
-        self.connect(self, SIGNAL('redirect_stdio(bool)'),
-                     self.main.redirect_internalshell_stdio)
+        self.edit_goto.connect(self.main.editor.load)
+        self.redirect_stdio.connect(self.main.redirect_internalshell_stdio)
         self.main.add_dockwidget(self)
 
         memoryprofiler_act = create_action(self, _("Profile memory line by line"),
