@@ -21,7 +21,7 @@ from .data import images
 from .widgets.memoryprofiler import (MemoryProfilerWidget,
 					           is_memoryprofiler_installed)
 
-_ = get_translation("memory_profiler", dirname="spyplugins.ui.memory_profiler")
+_ = get_translation("memory_profiler", dirname="spyder_memory_profiler")
 
 
 class MemoryProfilerConfigPage(PluginConfigPage):
