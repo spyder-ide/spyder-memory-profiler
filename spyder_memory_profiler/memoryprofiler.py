@@ -9,7 +9,7 @@
 """Memory profiler Plugin."""
 
 # Third party imports
-from qtpy.QtCore import Qt
+from qtpy.QtCore import Qt, Signal
 from qtpy.QtWidgets import QVBoxLayout, QGroupBox, QLabel
 
 from spyderlib.config.base import get_translation
@@ -69,6 +69,7 @@ class MemoryProfiler(MemoryProfilerWidget, SpyderPluginMixin):
     """Memory profiler."""
     CONF_SECTION = 'memoryprofiler'
     CONFIGWIDGET_CLASS = MemoryProfilerConfigPage
+    edit_goto = Signal(str, int, str)
 
     def __init__(self, parent=None):
         MemoryProfilerWidget.__init__(self, parent=parent)
@@ -99,7 +100,7 @@ class MemoryProfiler(MemoryProfilerWidget, SpyderPluginMixin):
 
     def on_first_registration(self):
         """Action to be performed on first plugin registration."""
-        self.main.tabify_plugins(self.main.inspector, self)
+        self.main.tabify_plugins(self.main.help, self)
         self.dockwidget.hide()
 
     def register_plugin(self):
@@ -108,12 +109,14 @@ class MemoryProfiler(MemoryProfilerWidget, SpyderPluginMixin):
         self.redirect_stdio.connect(self.main.redirect_internalshell_stdio)
         self.main.add_dockwidget(self)
 
-        memoryprofiler_act = create_action(self, _("Profile memory line by line"),
-                                         icon=self.get_plugin_icon(),
-                                         triggered=self.run_memoryprofiler)
+        memoryprofiler_act = create_action(self,
+                                           _("Profile memory line by line"),
+                                           icon=self.get_plugin_icon(),
+                                           triggered=self.run_memoryprofiler)
         memoryprofiler_act.setEnabled(is_memoryprofiler_installed())
         self.register_shortcut(memoryprofiler_act, context="Memory Profiler",
-                               name="Run memory profiler", default="Ctrl+Shift+F10")
+                               name="Run memory profiler",
+                               default="Ctrl+Shift+F10")
 
         self.main.run_menu_actions += [memoryprofiler_act]
         self.main.editor.pythonfile_dependent_actions += [memoryprofiler_act]

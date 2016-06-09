@@ -25,7 +25,8 @@ import time
 
 # Third party imports
 from qtpy.compat import getopenfilename
-from qtpy.QtCore import QByteArray, QProcess, Qt, QTextCodec
+from qtpy.QtCore import (QByteArray, QProcess, Qt, QTextCodec,
+                         QProcessEnvironment, Signal)
 from qtpy.QtGui import QApplication, QBrush, QColor, QFont
 from qtpy.QtWidgets import (QHBoxLayout, QWidget, QMessageBox, QVBoxLayout,
                             QLabel, QTreeWidget, QTreeWidgetItem)
@@ -71,6 +72,7 @@ class MemoryProfilerWidget(QWidget):
     """
     DATAPATH = get_conf_path('memoryprofiler.results')
     VERSION = '0.0.1'
+    redirect_stdio = Signal(bool)
 
     def __init__(self, parent):
         QWidget.__init__(self, parent)
@@ -237,7 +239,11 @@ class MemoryProfilerWidget(QWidget):
             env = [to_text_string(_pth)
                    for _pth in self.process.systemEnvironment()]
             baseshell.add_pathlist_to_PYTHONPATH(env, pythonpath)
-            self.process.setEnvironment(env)
+            processEnvironment = QProcessEnvironment()
+            for envItem in env:
+                envName, separator, envValue = envItem.partition('=')
+                processEnvironment.insert(envName, envValue)
+            self.process.setProcessEnvironment(processEnvironment)
 
         self.output = ''
         self.error_output = ''
@@ -246,7 +252,7 @@ class MemoryProfilerWidget(QWidget):
         # instead of replacing
         if osp.isfile(self.DATAPATH):
             os.remove(self.DATAPATH)
-            
+
         if os.name == 'nt':
             # On Windows, one has to replace backslashes by slashes to avoid
             # confusion with escape characters (otherwise, for example, '\t'
@@ -361,13 +367,13 @@ class MemoryProfilerDataTree(QTreeWidget):
 
     def load_data(self, profdatafile):
         """Load memory profiler data saved by memory_profiler module"""
-        
+
         # NOTE: Description of lstats below is for line_profiler. Here we
         # create a mock Lstats class to emulate this behaviour, so we can reuse
         # the spyder_line_profiler code. The structure of lstats is the same,
         # but the entries (line_no, hits, total_time) are replaced
         # by (line_no, usage, increment)
-        
+
         # lstats has the following layout :
         # lstats.timings =
         #     {(filename1, line_no1, function_name1):
@@ -378,11 +384,11 @@ class MemoryProfilerDataTree(QTreeWidget):
         #          (line_no2, hits2, total_time2),
         #          (line_no3, hits3, total_time3)]}
         # lstats.unit = time_factor
-            
+
         with open(profdatafile, 'r') as fid:
             reslines = fid.readlines()
 
-        # get the results into an "lstats"-like format so that the code below 
+        # get the results into an "lstats"-like format so that the code below
         # (originally for line_profiler) can be used without much modification
         class Lstats(object):
             def __init__(self):
@@ -412,7 +418,7 @@ class MemoryProfilerDataTree(QTreeWidget):
                 if l == '':
                     break
                 # split string (discard empty strings using filter)
-                stuff = filter(None, l.split(' '))
+                stuff = list(filter(None, l.split(' ')))
                 # get line number, mem usage, and mem increment
                 lineno = int(stuff[0])
                 if len(stuff) >= 5 and stuff[2] == 'MiB':
@@ -423,11 +429,11 @@ class MemoryProfilerDataTree(QTreeWidget):
                     increment = float(stuff[3])
                 else:
                     increment = None
-                # append 
+                # append
                 lstats.timings[(filename, line_no, function_name)].append(
                     (lineno, usage, increment))
-            
-            
+
+
         # First pass to group by filename
         self.stats = dict()
         linecache.checkcache()
@@ -463,14 +469,14 @@ class MemoryProfilerDataTree(QTreeWidget):
 
             # Fill dict
             self.stats[func_info] = [func_stats, func_peak_usage]
-            
+
     def fill_item(self, item, filename, line_no, code, usage, increment):
         item.setData(COL_POS, Qt.UserRole, (osp.normpath(filename), line_no))
 
         item.setData(COL_NO, Qt.DisplayRole, line_no)
 
         item.setData(COL_LINE, Qt.DisplayRole, code)
-        
+
         if usage is None:
             usage = ''
         else:
