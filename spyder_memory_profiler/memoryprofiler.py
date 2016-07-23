@@ -13,11 +13,11 @@ from qtpy.QtCore import Qt, Signal
 from qtpy.QtWidgets import QVBoxLayout, QGroupBox, QLabel
 
 from spyderlib.config.base import get_translation
+from spyderlib.config.gui import fixed_shortcut
 from spyderlib.plugins import SpyderPluginMixin, PluginConfigPage, runconfig
 from spyderlib.utils.qthelpers import get_icon, create_action
 
 # Local imports
-from .data import images
 from .widgets.memoryprofiler import (MemoryProfilerWidget,
 					           is_memoryprofiler_installed)
 
@@ -114,9 +114,8 @@ class MemoryProfiler(MemoryProfilerWidget, SpyderPluginMixin):
                                            icon=self.get_plugin_icon(),
                                            triggered=self.run_memoryprofiler)
         memoryprofiler_act.setEnabled(is_memoryprofiler_installed())
-        self.register_shortcut(memoryprofiler_act, context="Memory Profiler",
-                               name="Run memory profiler",
-                               default="Ctrl+Shift+F10")
+        fixed_shortcut("Ctrl+Shift+F10", self.main,
+                       self.run_memoryprofiler)
 
         self.main.run_menu_actions += [memoryprofiler_act]
         self.main.editor.pythonfile_dependent_actions += [memoryprofiler_act]
