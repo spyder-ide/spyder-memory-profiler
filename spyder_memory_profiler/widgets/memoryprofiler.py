@@ -27,9 +27,9 @@ import time
 from qtpy.compat import getopenfilename
 from qtpy.QtCore import (QByteArray, QProcess, Qt, QTextCodec,
                          QProcessEnvironment, Signal)
-from qtpy.QtGui import QApplication, QBrush, QColor, QFont
+from qtpy.QtGui import QBrush, QColor, QFont
 from qtpy.QtWidgets import (QHBoxLayout, QWidget, QMessageBox, QVBoxLayout,
-                            QLabel, QTreeWidget, QTreeWidgetItem)
+                            QLabel, QTreeWidget, QTreeWidgetItem, QApplication)
 from spyder.config.base import get_conf_path, get_translation
 from spyder.utils import programs
 from spyder.utils.qthelpers import create_toolbutton, get_icon
