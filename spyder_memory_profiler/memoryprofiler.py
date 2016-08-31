@@ -4,7 +4,7 @@
 # based on p_profiler.py by Santiago Jaramillo
 #
 # Licensed under the terms of the MIT License
-# (see spyderlib/__init__.py for details)
+# (see spyder/__init__.py for details)
 
 """Memory profiler Plugin."""
 
@@ -12,10 +12,10 @@
 from qtpy.QtCore import Qt, Signal
 from qtpy.QtWidgets import QVBoxLayout, QGroupBox, QLabel
 
-from spyderlib.config.base import get_translation
-from spyderlib.config.gui import fixed_shortcut
-from spyderlib.plugins import SpyderPluginMixin, PluginConfigPage, runconfig
-from spyderlib.utils.qthelpers import get_icon, create_action
+from spyder.config.base import get_translation
+from spyder.config.gui import fixed_shortcut
+from spyder.plugins import SpyderPluginMixin, PluginConfigPage, runconfig
+from spyder.utils.qthelpers import get_icon, create_action
 
 # Local imports
 from .widgets.memoryprofiler import (MemoryProfilerWidget,
