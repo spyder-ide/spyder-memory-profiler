@@ -4,7 +4,7 @@ spyder.memory_profiler
 Description
 -----------
 
-This is a plugin to run the python `memory_profiler <https://pypi.python.org/pypi/memory_profiler>`_ from within the `spyder <https://code.google.com/p/spyderlib/>`_ editor.
+This is a plugin to run the python `memory_profiler <https://pypi.python.org/pypi/memory_profiler>`_ from within the python IDE `spyder <https://github.com/spyder-ide/spyder>`_.
 
 The code is an adaptation of the profiler plugin integrated in `spyder <https://github.com/spyder-ide/spyder>`_.
 
@@ -12,14 +12,16 @@ Important
 ---------
 **Spyder** plugin support will be released with version 3.0 (Still in Beta).
 
-If you want to try out this plugin you need to use the latest development version o **Spyder**  (**master** branch).
+If you want to try out this plugin you need to use the latest development version of **Spyder**  (**master** branch).
 
 
 Install instructions
 --------------------
 
+See https://github.com/spyder-ide/spyder/wiki/User-plugins, but in short:
+
 ::
-  
+
   pip install spyder.memory_profiler
 
 Usage
