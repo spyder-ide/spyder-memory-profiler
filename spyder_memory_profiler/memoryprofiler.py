@@ -14,7 +14,8 @@ from qtpy.QtWidgets import QVBoxLayout, QGroupBox, QLabel
 
 from spyder.config.base import get_translation
 from spyder.config.gui import fixed_shortcut
-from spyder.plugins import SpyderPluginMixin, PluginConfigPage, runconfig
+from spyder.plugins import SpyderPluginMixin, runconfig
+from spyder.plugins.configdialog import PluginConfigPage
 from spyder.utils.qthelpers import get_icon, create_action
 
 # Local imports
