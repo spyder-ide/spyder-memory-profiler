@@ -33,8 +33,8 @@ from qtpy.QtWidgets import (QHBoxLayout, QWidget, QMessageBox, QVBoxLayout,
 from spyder.config.base import get_conf_path, get_translation
 from spyder.utils import programs
 from spyder.utils.qthelpers import create_toolbutton, get_icon
+from spyder.utils.misc import add_pathlist_to_PYTHONPATH
 from spyder.widgets.comboboxes import PythonModulesComboBox
-from spyder.widgets.externalshell import baseshell
 from spyder.widgets.variableexplorer.texteditor import TextEditor
 
 try:
@@ -197,7 +197,6 @@ class MemoryProfilerWidget(QWidget):
         self.redirect_stdio.emit(False)
         if filename:
             self.analyze(filename)
-
     def show_log(self):
         if self.output:
             TextEditor(self.output, title=_("Memory profiler output"),
@@ -238,7 +237,7 @@ class MemoryProfilerWidget(QWidget):
         if pythonpath is not None:
             env = [to_text_string(_pth)
                    for _pth in self.process.systemEnvironment()]
-            baseshell.add_pathlist_to_PYTHONPATH(env, pythonpath)
+            add_pathlist_to_PYTHONPATH(env, pythonpath)
             processEnvironment = QProcessEnvironment()
             for envItem in env:
                 envName, separator, envValue = envItem.partition('=')
