@@ -14,7 +14,7 @@ from qtpy.QtWidgets import QVBoxLayout, QGroupBox, QLabel
 
 from spyder.config.base import get_translation
 from spyder.config.gui import fixed_shortcut
-from spyder.plugins import SpyderPluginMixin, runconfig
+from spyder.plugins import SpyderPluginWidget, runconfig
 from spyder.plugins.configdialog import PluginConfigPage
 from spyder.utils.qthelpers import get_icon, create_action
 
@@ -66,15 +66,21 @@ class MemoryProfilerConfigPage(PluginConfigPage):
         self.setLayout(vlayout)
 
 
-class MemoryProfiler(MemoryProfilerWidget, SpyderPluginMixin):
+class MemoryProfiler(SpyderPluginWidget):
     """Memory profiler."""
     CONF_SECTION = 'memoryprofiler'
     CONFIGWIDGET_CLASS = MemoryProfilerConfigPage
     edit_goto = Signal(str, int, str)
 
     def __init__(self, parent=None):
-        MemoryProfilerWidget.__init__(self, parent=parent)
-        SpyderPluginMixin.__init__(self, parent)
+        SpyderPluginWidget.__init__(self, parent)
+        self.main = parent  # Spyder 3 compatibility
+
+        # Create widget and add to dockwindow
+        self.widget = MemoryProfilerWidget(self.main)
+        layout = QVBoxLayout()
+        layout.addWidget(self.widget)
+        self.setLayout(layout)
 
         # Initialize plugin
         self.initialize_plugin()
@@ -93,7 +99,7 @@ class MemoryProfiler(MemoryProfilerWidget, SpyderPluginMixin):
         Return the widget to give focus to when this plugin's dockwidget is
         raised on top-level.
         """
-        return self.datatree
+        return self.widget.datatree
 
     def get_plugin_actions(self):
         """Return a list of actions related to plugin."""
@@ -107,7 +113,7 @@ class MemoryProfiler(MemoryProfilerWidget, SpyderPluginMixin):
     def register_plugin(self):
         """Register plugin in Spyder's main window."""
         self.edit_goto.connect(self.main.editor.load)
-        self.redirect_stdio.connect(self.main.redirect_internalshell_stdio)
+        self.widget.redirect_stdio.connect(self.main.redirect_internalshell_stdio)
         self.main.add_dockwidget(self)
 
         memoryprofiler_act = create_action(self,
@@ -153,6 +159,6 @@ class MemoryProfiler(MemoryProfilerWidget, SpyderPluginMixin):
             if runconf.args_enabled:
                 args = runconf.args
 
-        MemoryProfilerWidget.analyze(
-            self, filename, wdir=wdir, args=args, pythonpath=pythonpath,
+        self.widget.analyze(
+            filename, wdir=wdir, args=args, pythonpath=pythonpath,
             use_colors=self.get_option('use_colors', True))
