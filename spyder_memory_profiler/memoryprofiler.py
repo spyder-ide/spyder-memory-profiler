@@ -119,10 +119,9 @@ class MemoryProfiler(SpyderPluginWidget):
         memoryprofiler_act = create_action(self,
                                            _("Profile memory line by line"),
                                            icon=self.get_plugin_icon(),
+                                           shortcut="Ctrl+Shift+F10",
                                            triggered=self.run_memoryprofiler)
         memoryprofiler_act.setEnabled(is_memoryprofiler_installed())
-        fixed_shortcut("Ctrl+Shift+F10", self.main,
-                       self.run_memoryprofiler)
 
         self.main.run_menu_actions += [memoryprofiler_act]
         self.main.editor.pythonfile_dependent_actions += [memoryprofiler_act]
