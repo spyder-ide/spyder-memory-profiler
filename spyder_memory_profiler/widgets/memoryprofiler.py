@@ -33,7 +33,7 @@ from qtpy.QtWidgets import (QHBoxLayout, QWidget, QMessageBox, QVBoxLayout,
 from spyder.config.base import get_conf_path, get_translation
 from spyder.utils import programs
 from spyder.utils.qthelpers import create_toolbutton, get_icon
-from spyder.utils.misc import add_pathlist_to_PYTHONPATH
+from spyder.utils.misc import add_pathlist_to_PYTHONPATH, get_python_executable
 from spyder.widgets.comboboxes import PythonModulesComboBox
 from spyder.widgets.variableexplorer.texteditor import TextEditor
 
@@ -261,7 +261,7 @@ class MemoryProfilerWidget(QWidget):
                       '"' + filename + '"']
             if args:
                 p_args.extend(programs.shell_split(args))
-            executable = programs.find_program('python')
+            executable = get_python_executable()
             executable += ' ' + ' '.join(p_args)
             executable = executable.replace(os.sep, '/')
             self.process.start(executable)
@@ -269,7 +269,7 @@ class MemoryProfilerWidget(QWidget):
             p_args = ['-m', 'memory_profiler', '-o', self.DATAPATH, filename]
             if args:
                 p_args.extend(programs.shell_split(args))
-            executable = 'python'
+            executable = get_python_executable()
             self.process.start(executable, p_args)
 
         running = self.process.waitForStarted()
