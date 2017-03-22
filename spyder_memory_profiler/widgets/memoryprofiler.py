@@ -73,6 +73,7 @@ class MemoryProfilerWidget(QWidget):
     DATAPATH = get_conf_path('memoryprofiler.results')
     VERSION = '0.0.1'
     redirect_stdio = Signal(bool)
+    sig_finished = Signal()
 
     def __init__(self, parent):
         QWidget.__init__(self, parent)
@@ -306,6 +307,7 @@ class MemoryProfilerWidget(QWidget):
         # FIXME: figure out if show_data should be called here or
         #        as a signal from the combobox
         self.show_data(justanalyzed=True)
+        self.sig_finished.emit()
 
     def kill_if_running(self):
         if self.process is not None:
