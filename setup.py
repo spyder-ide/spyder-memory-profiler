@@ -1,8 +1,8 @@
-#!/usr/bin/env python
 # -*- coding: utf-8 -*-
-"""
-Setup script for spyder_memory_profiler
-"""
+#
+# Copyright © 2013 Spyder Project Contributors
+# Licensed under the terms of the MIT License
+# (see LICENSE.txt for details)
 
 from setuptools import setup, find_packages
 import os
