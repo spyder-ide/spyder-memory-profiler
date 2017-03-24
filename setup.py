@@ -56,7 +56,7 @@ stronger color have the largest increments in memory usage.
 setup(
     name=LIBNAME,
     version=get_version(),
-    packages=find_packages(exclude=['contrib', 'docs', 'tests*']),
+    packages=find_packages(),
     package_data={LIBNAME: get_package_data(LIBNAME, EXTLIST)},
     keywords=["Qt PyQt4 PyQt5 PySide spyder plugins spyplugins profiler"],
     install_requires=REQUIREMENTS,
