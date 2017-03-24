@@ -21,13 +21,6 @@ def get_version():
                 return version
 
 
-def get_readme():
-    """ """
-    with open('README.rst') as f:
-        readme = str(f.read())
-    return readme
-
-
 def get_package_data(name, extlist):
     """Return data files for package *name* with extensions in *extlist*"""
     flist = []
@@ -45,6 +38,20 @@ REQUIREMENTS = ['memory_profiler', 'spyder>=3']
 EXTLIST = ['.jpg', '.png', '.json', '.mo', '.ini']
 LIBNAME = 'spyder_memory_profiler'
 
+LONG_DESCRIPTION = """
+This is a plugin for the Spyder IDE that integrates the Python memory profiler.
+It allows you to see the memory usage in every line.
+
+Usage
+-----
+
+Add a ``@profile`` decorator to the functions that you wish to profile then
+press Ctrl+Shift+F10 to run the profiler on the current script, or go to
+``Run > Profile memory line by line``.
+
+The results will be shown in a dockwidget, grouped by function. Lines with a
+stronger color have the largest increments in memory usage.
+"""
 
 setup(
     name=LIBNAME,
@@ -58,7 +65,7 @@ setup(
     author='Spyder Project Contributors',
     description='Plugin for the Spyder IDE that integrates the Python'
         ' memory profiler',
-    long_description=get_readme(),
+    long_description=LONG_DESCRIPTION,
     classifiers=[
         'Development Status :: 4 - Beta',
         'Environment :: X11 Applications :: Qt',
