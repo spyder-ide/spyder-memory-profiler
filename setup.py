@@ -41,7 +41,7 @@ def get_package_data(name, extlist):
 
 
 # Requirements
-REQUIREMENTS = ['memory_profiler']
+REQUIREMENTS = ['memory_profiler', 'spyder>=3']
 EXTLIST = ['.jpg', '.png', '.json', '.mo', '.ini']
 LIBNAME = 'spyder_memory_profiler'
 
@@ -55,11 +55,9 @@ setup(
     install_requires=REQUIREMENTS,
     url='https://github.com/spyder-ide/spyder-memory-profiler',
     license='MIT',
-    author='',
-    author_email='',
-    maintainer='The Spyder Development Team',
-    maintainer_email='',
-    description=' This is a plugin to run the python memory_profiler from within the spyder IDE.',
+    author='Spyder Project Contributors',
+    description='Plugin for the Spyder IDE that integrates the Python'
+        ' memory profiler',
     long_description=get_readme(),
     classifiers=[
         'Development Status :: 4 - Beta',
@@ -71,7 +69,7 @@ setup(
         'Programming Language :: Python :: 2',
         'Programming Language :: Python :: 2.7',
         'Programming Language :: Python :: 3',
-        'Programming Language :: Python :: 3.3',
-        'Programming Language :: Python :: 3.4',
         'Programming Language :: Python :: 3.5',
-        'Topic :: Software Development :: Widget Sets'])
+        'Programming Language :: Python :: 3.6',
+        'Topic :: Software Development',
+        'Topic :: Text Editors :: Integrated Development Environments (IDE)'])
