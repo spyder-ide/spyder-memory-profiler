@@ -1,5 +1,38 @@
-spyder.memory_profiler
+spyder-memory-profiler
 ======================
+
+Project information 
+-------------------
+
+.. image:: https://img.shields.io/pypi/l/spyder-memory-profiler.svg
+   :target: https://github.com/spyder-ide/spyder-memory-profiler/blob/master/LICENSE.txt
+   
+.. image:: https://img.shields.io/pypi/v/spyder-memory-profiler.svg
+   :target: https://pypi.python.org/pypi/spyder-memory-profiler
+
+.. image:: https://badges.gitter.im/spyder-ide/spyder.svg
+   :target: https://gitter.im/spyder-ide/public
+
+Build information
+-----------------
+
+.. image:: https://travis-ci.org/spyder-ide/spyder-memory-profiler.svg?branch=master
+   :target: https://travis-ci.org/spyder-ide/spyder-memory-profiler
+
+.. image:: https://ci.appveyor.com/api/projects/status/gd88722qallyheoe/branch/master?svg=true
+   :target: https://ci.appveyor.com/project/spyder-ide/spyder-memory-profiler
+
+.. image:: https://circleci.com/gh/spyder-ide/spyder-memory-profiler/tree/master.svg?style=shield
+   :target: https://circleci.com/gh/spyder-ide/spyder-memory-profiler/tree/master
+
+.. image:: https://coveralls.io/repos/github/spyder-ide/spyder-memory-profiler/badge.svg?branch=master
+   :target: https://coveralls.io/github/spyder-ide/spyder-memory-profiler?branch=master
+
+.. image:: https://www.quantifiedcode.com/api/v1/project/4a08fcbf42db40589ec02efd38597e8a/badge.svg
+  :target: https://www.quantifiedcode.com/app/project/4a08fcbf42db40589ec02efd38597e8a
+
+.. image:: https://scrutinizer-ci.com/g/spyder-ide/spyder-memory-profiler/badges/quality-score.png?b=master
+   :target: https://scrutinizer-ci.com/g/spyder-ide/spyder-memory-profiler/?branch=master)
 
 Description
 -----------
@@ -8,21 +41,20 @@ This is a plugin to run the python `memory_profiler <https://pypi.python.org/pyp
 
 The code is an adaptation of the profiler plugin integrated in `spyder <https://github.com/spyder-ide/spyder>`_.
 
-Important
----------
-**Spyder** plugin support will be released with version 3.0 (Still in Beta).
-
-If you want to try out this plugin you need to use the latest development version of **Spyder**  (**master** branch).
-
-
 Install instructions
 --------------------
 
-See https://github.com/spyder-ide/spyder/wiki/User-plugins, but in short:
-
+See https://github.com/spyder-ide/spyder/wiki/User-plugins but in
+short, the following command installs the development version of the
+memory-profiler plugin:
+ 
 ::
+ 
+  pip install git+git://github.com/spyder-ide/spyder-memory-profiler.git
+ 
+The plugin is not yet included in PyPI.
 
-  pip install spyder.memory_profiler
+You need to also install `Spyder <https://github.com/spyder-ide/spyder>`_ (version 3.0 or higher) and `memory profiler <https://pypi.python.org/pypi/memory_profiler>`_ .
 
 Usage
 -----
