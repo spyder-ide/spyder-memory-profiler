@@ -44,17 +44,16 @@ The code is an adaptation of the profiler plugin integrated in `spyder <https://
 Install instructions
 --------------------
 
-See https://github.com/spyder-ide/spyder/wiki/User-plugins but in
-short, the following command installs the development version of the
-memory-profiler plugin:
- 
-::
- 
-  pip install git+git://github.com/spyder-ide/spyder-memory-profiler.git
- 
-The plugin is not yet included in PyPI.
+The memory-profiler plugin is available in the ``spyder-ide`` channel in
+Anaconda and in PyPI, so it can be installed with the following
+commands:
 
-You need to also install `Spyder <https://github.com/spyder-ide/spyder>`_ (version 3.0 or higher) and `memory profiler <https://pypi.python.org/pypi/memory_profiler>`_ .
+* Using Anaconda: ``conda install -c spyder-ide spyder-memory-profiler``
+* Using pip: ``pip install spyder-memory-profiler``
+
+All dependencies will be automatically installed. You have to restart
+Spyder before you can use the plugin.
+
 
 Usage
 -----
