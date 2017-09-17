@@ -9,6 +9,7 @@
 
 # Standard library imports
 import os
+import sys
 
 # Third party imports
 from pytestqt import qtbot
@@ -36,7 +37,12 @@ def foo():
 foo()"""
         
 def test_profile_and_display_results(qtbot, tmpdir, monkeypatch):
-    """Run profiler on simple script and check that results are okay."""
+    """
+    Run profiler on simple script and check that results are okay.
+
+    This is a fairly simple integration test which checks that the plugin works
+    on a basic level.
+    """
     os.chdir(tmpdir.strpath)
     testfilename = tmpdir.join('test_foo.py').strpath
 
@@ -62,12 +68,20 @@ def test_profile_and_display_results(qtbot, tmpdir, monkeypatch):
     for i in range(6):
         assert top.child(i).data(0, Qt.DisplayRole) == i + 1  # line no
 
-    # column 2 has increment (in Mib); displayed as 'xxx MiB' so need to strip
-    # last 4 characters
-    assert float(top.child(2).data(2, Qt.DisplayRole)[:-4]) >= 7  # increment (MiB)
-    assert float(top.child(2).data(2, Qt.DisplayRole)[:-4]) <= 8
-    assert float(top.child(3).data(2, Qt.DisplayRole)[:-4]) >= 150
-    assert float(top.child(3).data(2, Qt.DisplayRole)[:-4]) <= 160
-    assert float(top.child(4).data(2, Qt.DisplayRole)[:-4]) >= -160
-    assert float(top.child(4).data(2, Qt.DisplayRole)[:-4]) <= -150
+    # Column 2 has increment (in MiB); displayed as 'xxx MiB' so need to strip
+    # last 4 characters. Allow for 2% margin in measured memory consumption.
+    measured = float(top.child(2).data(2, Qt.DisplayRole)[:-4])
+    list_size_in_mib = sys.getsizeof([1] * 10 ** 6) / 2 ** 20
+    assert measured >= 0.98 * list_size_in_mib
+    assert measured <= 1.02 * list_size_in_mib
+
+    measured = float(top.child(3).data(2, Qt.DisplayRole)[:-4])
+    list_size_in_mib = sys.getsizeof([2] * 2 * 10 ** 7) / 2 ** 20
+    assert measured >= 0.98 * list_size_in_mib
+    assert measured <= 1.02 * list_size_in_mib
+
+    measured = float(top.child(4).data(2, Qt.DisplayRole)[:-4])
+    assert measured >= -1.02 * list_size_in_mib
+    assert measured <= -0.98 * list_size_in_mib
+
     assert float(top.child(5).data(2, Qt.DisplayRole)[:-4]) == 0
