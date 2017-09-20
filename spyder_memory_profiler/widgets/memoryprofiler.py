@@ -560,7 +560,10 @@ class MemoryProfilerDataTree(QTreeWidget):
 
                 # Color background
                 if increment is not None:
-                    alpha = increment / max_increment if max_increment != 0 else 0
+                    if increment > 0 and max_increment > 0:
+                        alpha = increment / max_increment
+                    else:
+                        alpha = 0
                     color = QColor(func_color)
                     color.setAlphaF(alpha)  # Returns None
                     color = QBrush(color)
