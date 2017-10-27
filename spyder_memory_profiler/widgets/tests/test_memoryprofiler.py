@@ -13,6 +13,7 @@ import os
 import sys
 
 # Third party imports
+import pytest
 from pytestqt import qtbot
 from qtpy.QtCore import Qt
 
@@ -36,7 +37,8 @@ def foo():
     del b
     return a
 foo()"""
-        
+
+@pytest.mark.qt_log_level_fail('WARNING')
 def test_profile_and_display_results(qtbot, tmpdir, monkeypatch):
     """
     Run profiler on simple script and check that results are okay.
