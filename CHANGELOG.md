@@ -1,5 +1,15 @@
 # History of changes
 
+## Version 0.1.2 (2017/11/08)
+
+This release fixes a packaging mistake in the 0.1.1 release.
+
+### Pull Requests Merged
+
+* [PR 19](https://github.com/spyder-ide/spyder-memory-profiler/pull/19) - Restrict recursive inclusion filter
+
+In this release 1 pull request was closed.
+
 ## Version 0.1.1 (2017/11/03)
 
 This release fixes some minor bugs.
