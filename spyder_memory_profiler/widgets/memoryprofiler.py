@@ -29,11 +29,11 @@ from qtpy.QtGui import QBrush, QColor, QFont
 from qtpy.QtWidgets import (QHBoxLayout, QWidget, QMessageBox, QVBoxLayout,
                             QLabel, QTreeWidget, QTreeWidgetItem, QApplication)
 from spyder.config.base import get_conf_path, get_translation
+from spyder.plugins.variableexplorer.widgets.texteditor import TextEditor
 from spyder.utils import programs
-from spyder.utils.qthelpers import create_toolbutton, get_icon
 from spyder.utils.misc import add_pathlist_to_PYTHONPATH, get_python_executable
+from spyder.utils.qthelpers import create_toolbutton, get_icon
 from spyder.widgets.comboboxes import PythonModulesComboBox
-from spyder.widgets.variableexplorer.texteditor import TextEditor
 
 try:
     from spyder.py3compat import to_text_string, getcwd

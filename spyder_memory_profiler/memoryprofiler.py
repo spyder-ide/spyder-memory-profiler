@@ -14,9 +14,10 @@ from qtpy.QtWidgets import QVBoxLayout, QGroupBox, QLabel
 from spyder.utils.qthelpers import qapplication
 MAIN_APP = qapplication()
 
+from spyder.api.plugins import SpyderPluginWidget
+from spyder.api.preferences import PluginConfigPage
 from spyder.config.base import get_translation
-from spyder.plugins import SpyderPluginWidget, runconfig
-from spyder.plugins.configdialog import PluginConfigPage
+from spyder.preferences import runconfig
 from spyder.utils.qthelpers import get_icon, create_action
 
 # Local imports
@@ -75,16 +76,12 @@ class MemoryProfiler(SpyderPluginWidget):
 
     def __init__(self, parent=None):
         SpyderPluginWidget.__init__(self, parent)
-        self.main = parent  # Spyder 3 compatibility
 
         # Create widget and add to dockwindow
         self.widget = MemoryProfilerWidget(self.main)
         layout = QVBoxLayout()
         layout.addWidget(self.widget)
         self.setLayout(layout)
-
-        # Initialize plugin
-        self.initialize_plugin()
 
     # --- SpyderPluginWidget API ----------------------------------------------
     def get_plugin_title(self):
@@ -113,9 +110,10 @@ class MemoryProfiler(SpyderPluginWidget):
 
     def register_plugin(self):
         """Register plugin in Spyder's main window."""
+        super(MemoryProfiler, self).register_plugin()
+
         self.edit_goto.connect(self.main.editor.load)
         self.widget.redirect_stdio.connect(self.main.redirect_internalshell_stdio)
-        self.main.add_dockwidget(self)
 
         memoryprofiler_act = create_action(self,
                                            _("Profile memory line by line"),
@@ -146,10 +144,8 @@ class MemoryProfiler(SpyderPluginWidget):
 
     def analyze(self, filename):
         """Reimplement analyze method."""
-        if self.dockwidget and not self.ismaximized:
-            self.dockwidget.setVisible(True)
-            self.dockwidget.setFocus()
-            self.dockwidget.raise_()
+        if self.dockwidget:
+            self.switch_to_plugin()
         pythonpath = self.main.get_spyder_pythonpath()
         runconf = runconfig.get_run_configuration(filename)
         wdir, args = None, None
