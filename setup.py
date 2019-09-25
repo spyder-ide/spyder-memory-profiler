@@ -34,7 +34,7 @@ def get_package_data(name, extlist):
 
 
 # Requirements
-REQUIREMENTS = ['memory_profiler', 'spyder>=3']
+REQUIREMENTS = ['memory_profiler', 'spyder>=4']
 EXTLIST = ['.jpg', '.png', '.json', '.mo', '.ini']
 LIBNAME = 'spyder_memory_profiler'
 
