@@ -1,5 +1,16 @@
 # History of changes
 
+## Version 0.2.0 (2019/12/17)
+
+This release updates the plugin to be used with Spyder 4.
+
+### Pull Requests Merged
+
+* [PR 23](https://github.com/spyder-ide/spyder-memory-profiler/pull/23) - PR: Update to Spyder 4
+* [PR 13](https://github.com/spyder-ide/spyder-memory-profiler/pull/13) - Update readme: Plugin can now be installed using conda or pip
+
+In this release 2 pull requests were closed.
+
 ## Version 0.1.2 (2017/11/08)
 
 This release fixes a packaging mistake in the 0.1.1 release.
