@@ -71,6 +71,7 @@ class MemoryProfilerConfigPage(PluginConfigPage):
 class MemoryProfiler(SpyderPluginWidget):
     """Memory profiler."""
     CONF_SECTION = 'memoryprofiler'
+    CONF_DEFAULTS = [(CONF_SECTION, {'use_colors': True})]    
     CONFIGWIDGET_CLASS = MemoryProfilerConfigPage
     edit_goto = Signal(str, int, str)
 
