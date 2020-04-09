@@ -52,9 +52,5 @@ jobs:
           conda list
       - name: Run tests
         shell: bash -l {0}
-        run: xvfb-run --auto-servernum pytest spyder_memory_profiler --cov=spyder_memory_profiler -x -vv
+        run: xvfb-run --auto-servernum pytest spyder_memory_profiler -x -vv
         timeout-minutes: 10
-      - name: Upload coverage to Codecov
-        if: matrix.PYTHON_VERSION == '3.8'
-        shell: bash -l {0}
-        run: codecov -t f4ec7cf7-044e-496f-8efc-7bf81269a4c6
