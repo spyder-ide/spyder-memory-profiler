@@ -15,13 +15,12 @@
 [![Windows status](https://github.com/spyder-ide/spyder-memory-profiler/workflows/Windows%20tests/badge.svg)](https://github.com/spyder-ide/spyder-memory-profiler/actions?query=workflow%3A%22Windows+tests%22)
 [![Linux status](https://github.com/spyder-ide/spyder-memory-profiler/workflows/Linux%20tests/badge.svg)](https://github.com/spyder-ide/spyder-memory-profiler/actions?query=workflow%3A%22Linux+tests%22)
 [![MacOS status](https://github.com/spyder-ide/spyder-memory-profiler/workflows/Macos%20tests/badge.svg)](https://github.com/spyder-ide/spyder-memory-profiler/actions?query=workflow%3A%22Macos+tests%22)
-[![Crowdin](https://badges.crowdin.net/spyder-memory-profiler/localized.svg)](https://crowdin.com/project/spyder-memory-profiler)
 
 ## Description
 
 This is a plugin to run the Python
-`[memory_profiler](https://pypi.python.org/pypi/memory_profiler>`
-from within the Python IDE `[Spyder](https://github.com/spyder-ide/spyder).
+[memory_profiler](https://pypi.python.org/pypi/memory_profiler)
+from within the Python IDE [Spyder](https://github.com/spyder-ide/spyder).
 
 The code is an adaptation of the profiler plugin integrated in Spyder.
 
