@@ -196,15 +196,21 @@ class MemoryProfilerWidget(QWidget):
         self.redirect_stdio.emit(False)
         if filename:
             self.analyze(filename)
+
     def show_log(self):
         if self.output:
-            TextEditor(self.output, title=_("Memory profiler output"),
-                       readonly=True, size=(700, 500)).exec_()
+            editor = TextEditor(self.output, title=_("Memory profiler output"),
+                                readonly=True)
+            editor.show()
+            editor.exec_()
 
     def show_errorlog(self):
         if self.error_output:
-            TextEditor(self.error_output, title=_("Memory profiler output"),
-                       readonly=True, size=(700, 500)).exec_()
+            editor = TextEditor(self.error_output,
+                                title=_("Memory profiler output"),
+                                readonly=True)
+            editor.show()
+            editor.exec_()
 
     def start(self, wdir=None, args=None, pythonpath=None):
         filename = to_text_string(self.filecombo.currentText())
