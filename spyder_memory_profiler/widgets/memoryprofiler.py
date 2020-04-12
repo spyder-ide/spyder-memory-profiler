@@ -201,6 +201,8 @@ class MemoryProfilerWidget(QWidget):
         if self.output:
             editor = TextEditor(self.output, title=_("Memory profiler output"),
                                 readonly=True)
+            # Call .show() to dynamically resize editor;
+            # see spyder-ide/spyder#12202
             editor.show()
             editor.exec_()
 
@@ -209,6 +211,8 @@ class MemoryProfilerWidget(QWidget):
             editor = TextEditor(self.error_output,
                                 title=_("Memory profiler output"),
                                 readonly=True)
+            # Call .show() to dynamically resize editor;
+            # see spyder-ide/spyder#12202
             editor.show()
             editor.exec_()
 
