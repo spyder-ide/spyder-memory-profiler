@@ -17,7 +17,6 @@ MAIN_APP = qapplication()
 from spyder.api.plugins import SpyderPluginWidget
 from spyder.api.preferences import PluginConfigPage
 from spyder.config.base import get_translation
-from spyder.preferences import runconfig
 from spyder.utils.qthelpers import get_icon, create_action
 
 # Local imports
@@ -84,6 +83,15 @@ class MemoryProfiler(SpyderPluginWidget):
         layout.addWidget(self.widget)
         self.setLayout(layout)
 
+    def update_pythonpath(self):
+        """
+        Update the PYTHONPATH used when running the line_profiler.
+        This function is called whenever the Python path set in Spyder changes.
+        It synchronizes the PYTHONPATH in the line_profiler widget with the
+        PYTHONPATH in Spyder.
+        """
+        self.widget.spyder_pythonpath = self.main.get_spyder_pythonpath()
+
     # --- SpyderPluginWidget API ----------------------------------------------
     def get_plugin_title(self):
         """Return widget title."""
@@ -112,6 +120,10 @@ class MemoryProfiler(SpyderPluginWidget):
     def register_plugin(self):
         """Register plugin in Spyder's main window."""
         super(MemoryProfiler, self).register_plugin()
+
+        # Spyder PYTHONPATH
+        self.update_pythonpath()
+        self.main.sig_pythonpath_changed.connect(self.update_pythonpath)
 
         self.edit_goto.connect(self.main.editor.load)
         self.widget.redirect_stdio.connect(self.main.redirect_internalshell_stdio)
@@ -147,15 +159,5 @@ class MemoryProfiler(SpyderPluginWidget):
         """Reimplement analyze method."""
         if self.dockwidget:
             self.switch_to_plugin()
-        pythonpath = self.main.get_spyder_pythonpath()
-        runconf = runconfig.get_run_configuration(filename)
-        wdir, args = None, None
-        if runconf is not None:
-            if runconf.wdir_enabled:
-                wdir = runconf.wdir
-            if runconf.args_enabled:
-                args = runconf.args
-
         self.widget.analyze(
-            filename, wdir=wdir, args=args, pythonpath=pythonpath,
-            use_colors=self.get_option('use_colors', True))
+            filename, use_colors=self.get_option('use_colors', True))
