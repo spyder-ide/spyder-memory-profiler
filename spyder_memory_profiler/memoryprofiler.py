@@ -72,7 +72,6 @@ class MemoryProfiler(SpyderPluginWidget):
     CONF_SECTION = 'memoryprofiler'
     CONF_DEFAULTS = [(CONF_SECTION, {'use_colors': True})]    
     CONFIGWIDGET_CLASS = MemoryProfilerConfigPage
-    edit_goto = Signal(str, int, str)
 
     def __init__(self, parent=None):
         SpyderPluginWidget.__init__(self, parent)
@@ -125,7 +124,7 @@ class MemoryProfiler(SpyderPluginWidget):
         self.update_pythonpath()
         self.main.sig_pythonpath_changed.connect(self.update_pythonpath)
 
-        self.edit_goto.connect(self.main.editor.load)
+        self.widget.datatree.edit_goto.connect(self.main.editor.load)
         self.widget.redirect_stdio.connect(self.main.redirect_internalshell_stdio)
 
         memoryprofiler_act = create_action(self,

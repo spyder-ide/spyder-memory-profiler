@@ -374,6 +374,8 @@ class MemoryProfilerDataTree(QTreeWidget):
     Convenience tree widget (with built-in model)
     to store and view memory profiler data.
     """
+    edit_goto = Signal(str, int, str)
+
     def __init__(self, parent=None):
         QTreeWidget.__init__(self, parent)
         self.header_list = [
@@ -614,7 +616,7 @@ class MemoryProfilerDataTree(QTreeWidget):
 
     def item_activated(self, item):
         filename, line_no = item.data(COL_POS, Qt.UserRole)
-        self.parent().edit_goto.emit(filename, line_no, '')
+        self.edit_goto.emit(filename, line_no, '')
 
 
 def test():
