@@ -1,5 +1,27 @@
 # History of changes
 
+## Version 0.2.1 (2020/04/18)
+
+This release fixes some compatibility issues with Spyder 4.1 and some other bugs.
+
+### Issues Closed
+
+* [Issue 27](https://github.com/spyder-ide/spyder-memory-profiler/issues/27) - Check TextEditor call ([PR 29](https://github.com/spyder-ide/spyder-memory-profiler/pull/29))
+* [Issue 26](https://github.com/spyder-ide/spyder-memory-profiler/issues/26) - Move README to markdown ([PR 28](https://github.com/spyder-ide/spyder-memory-profiler/pull/28))
+* [Issue 25](https://github.com/spyder-ide/spyder-memory-profiler/issues/25) - Move CI to github actions ([PR 28](https://github.com/spyder-ide/spyder-memory-profiler/pull/28))
+* [Issue 21](https://github.com/spyder-ide/spyder-memory-profiler/issues/21) - start Profile memory usage ([PR 31](https://github.com/spyder-ide/spyder-memory-profiler/pull/31))
+
+### Pull Requests Merged
+
+* [PR 31](https://github.com/spyder-ide/spyder-memory-profiler/pull/31) - PR: Fix Start button ([21](https://github.com/spyder-ide/spyder-memory-profiler/issues/21))
+* [PR 30](https://github.com/spyder-ide/spyder-memory-profiler/pull/30) - PR: Fix opening editor from profiler widget
+* [PR 29](https://github.com/spyder-ide/spyder-memory-profiler/pull/29) - Widget: Fix initialization of TextEditor ([27](https://github.com/spyder-ide/spyder-memory-profiler/issues/27))
+* [PR 28](https://github.com/spyder-ide/spyder-memory-profiler/pull/28) - PR: Transfer CI to GitHub Actions ([26](https://github.com/spyder-ide/spyder-memory-profiler/issues/26), [25](https://github.com/spyder-ide/spyder-memory-profiler/issues/25))
+* [PR 24](https://github.com/spyder-ide/spyder-memory-profiler/pull/24) -  PR: Add CONF_DEFAULTS
+
+In this release 4 issues and 5 pull requests were closed.
+
+
 ## Version 0.2.0 (2019/12/17)
 
 This release updates the plugin to be used with Spyder 4.
