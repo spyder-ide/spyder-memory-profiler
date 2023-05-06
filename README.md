@@ -1,3 +1,15 @@
+# :exclamation: :exclamation: :exclamation: This plugin is no longer maintained :exclamation: :exclamation: :exclamation:
+
+This plugin does not work with the current version of Spyder. The last version of Spyder supported by the plugin is version 4.
+
+The [memory_profiler](https://pypi.python.org/pypi/memory_profiler) module that this plugin is based on, is also no longer maintained.
+
+There are no plans to update this plugin. If you are interested in reviving the plugin, please contact the [Spyder project leader](https://github.com/spyder-ide/governance-and-guidelines/blob/main/people.md#lead-maintainer).
+
+<details>
+
+<summary> The last version of the README file </summary>
+
 # Spyder memory profiler plugin
 
 ## Project details
@@ -63,3 +75,5 @@ Spyder and its subprojects are funded thanks to the generous support of
 and the donations we have received from our users around the world through [Open Collective](https://opencollective.com/spyder/):
 
 [![Sponsors](https://opencollective.com/spyder/sponsors.svg)](https://opencollective.com/spyder#support)
+
+</details>
